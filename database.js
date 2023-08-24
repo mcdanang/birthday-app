@@ -1,11 +1,9 @@
-const { Pool } = require("pg");
+const { PrismaClient } = require("@prisma/client");
 
-const pool = new Pool({
-	user: process.env.POSTGRES_USER,
-	host: process.env.POSTGRES_HOST,
-	database: process.env.POSTGRES_DB,
-	password: process.env.POSTGRES_PASSWORD,
-	port: process.env.POSTGRES_PORT,
-});
+const globalForPrisma = global;
 
-module.exports = pool;
+const prisma = globalForPrisma.prisma || new PrismaClient();
+
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+
+module.exports = prisma;
