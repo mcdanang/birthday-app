@@ -91,16 +91,21 @@ const deleteUser = async (req, res) => {
 const updateUser = async (req, res) => {
 	try {
 		const userId = Number(req.params.userId);
-		let { first_name, last_name, birthday, location, country, email } = req.body;
+		let body = req.body;
 		const user = await prisma.user.findUnique({
 			where: {
 				id: userId,
 			},
 		});
-
-		if (location) user.location = location;
-		if (country) user.country = country;
-		if (birthday) user.birthday = new Date(birthday);
+		for (let key in body) {
+			if (body[key]) {
+				if (key == "birthday") {
+					user[key] = new Date(body[key]);
+				} else {
+					user[key] = body[key];
+				}
+			}
+		}
 
 		let timezone = cityTZ.findFromCityStateProvince(`${user.location} ${user.country}`);
 		if (timezone.length === 0) {

@@ -44,9 +44,9 @@ For example, if one user is in New York and the second user is in Melbourne, the
 
 4. **Generate Prisma Client:**
    
-   Run the following command to generate the Prisma Client:
+   Run the following command to create the first migration (and start seeding):
    ```bash
-   npx prisma generate
+   npx prisma migrate dev --name init
    ```
 
 5. **Run the Application:**
@@ -63,6 +63,10 @@ For example, if one user is in New York and the second user is in Melbourne, the
 - `POST /user`: Create a user
 - `DELETE /user/:userId`: Delete a user
 - `PUT /user/:userId`: Update user details
+  
+URL for published documentation
+https://documenter.getpostman.com/view/17491289/2s9Y5WxiSY
+
 
 ## Note
 
