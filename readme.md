@@ -57,6 +57,13 @@ For example, if one user is in New York and the second user is in Melbourne, the
     ```
     Open http://localhost:3000 to view it in the browser.
 
+6. **Test the Application:**
+   
+    You can also test the application using:
+    ```bash
+    npm test
+    ```
+
 ## API Endpoints
 
 - `GET /user`: Get users data

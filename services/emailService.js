@@ -13,11 +13,14 @@ const sendEmail = async (id, email, message) => {
 			where: { id },
 			data: { last_sent: new Date() },
 		});
+		return { id, ...result.data };
 	} catch (error) {
 		if (error.code == "ERR_BAD_RESPONSE") {
 			console.log({ id, status: "not_sent", message: "Email not sent" });
+			return { id, status: "not_sent", message: "Email not sent" };
 		} else {
 			console.log({ id, status: "error", message: "Something went wrong" });
+			return { id, status: "error", message: "Something went wrong" };
 		}
 	}
 };
